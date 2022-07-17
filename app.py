@@ -7,7 +7,7 @@ from security import authenticate,identity
 from resources.user import UserRegister
 from resources.item import Item , ItemList
 from resources.store import StoreList , Store
-
+from db import db
 
 # creating app and api
 app = Flask(__name__)
@@ -32,7 +32,6 @@ api.add_resource(UserRegister, '/register')
 
 # running the app
 if __name__ == '__main__': # if in case app.py is imported then this if block won't be run
-    from db import db
     db.init_app(app)
     app.run(port=5000 , debug=True) 
 # as when we import a file, python actually runs the file and we dont want the app to be running again 
