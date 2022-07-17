@@ -17,11 +17,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turns off the Flask_sqlal
 app.secret_key = 'jose'
 api = Api(app)
 
-# creating the table inside data.db
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 # setting up JWT with the secret key
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 jwt = JWT(app,authenticate , identity) # authenticate and identity imported from security
