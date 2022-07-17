@@ -11,6 +11,7 @@ from db import db
 
 # creating app and api
 app = Flask(__name__)
+app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' # telling the app from where to find the data.db file 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turns off the Flask_sqlalchemy tracker for changes as it cost some resources
 # however this does not turn off the underlying sqlalchemy tracker
@@ -33,5 +34,9 @@ api.add_resource(UserRegister, '/register')
 # running the app
 if __name__ == '__main__': # if in case app.py is imported then this if block won't be run
     db.init_app(app)
-    app.run(port=5000 , debug=True) 
+    if app.config['DEBUG']:
+        @app.before_first_request
+        def create_tables():
+            db.create_all()
+    app.run(port=5000) 
 # as when we import a file, python actually runs the file and we dont want the app to be running again 
