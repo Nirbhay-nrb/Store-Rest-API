@@ -8,5 +8,14 @@ Flask-RESTful
 <br>Flask-JWT
 <br>Flask-SQLAlchemy
 
-### Running the app:
-``` python app.py ```
+### URL:
+``` https://stores-rest-api-flask-1.herokuapp.com ```
+### End points:
+```
+/items
+/item/<name>
+/stores
+/store/<name>
+/register
+/login
+```
