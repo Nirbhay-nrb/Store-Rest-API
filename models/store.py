@@ -6,7 +6,7 @@ class StoreModel(db.Model):
     id = db.Column(db.Integer , primary_key = True)
     name = db.Column(db.String(80))
 
-    items = db.relationship('ItemModel' , lazy = 'dynamic') # gets all the items from the ItemModel corresponding to the store_id
+    items = db.relationship('ItemModel' , lazy = 'dynamic' , overlaps = 'store') # gets all the items from the ItemModel corresponding to the store_id
 
     # this creates an object for every item in a store, which may cause a lot of resources
     # so putting lazy = dynamic will prevent sql alchemy from making an object for every item
