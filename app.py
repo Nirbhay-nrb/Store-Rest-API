@@ -1,3 +1,5 @@
+import os
+
 from datetime import timedelta
 from flask import Flask
 from flask_restful import Api
@@ -12,7 +14,9 @@ from db import db
 # creating app and api
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' # telling the app from where to find the data.db file 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL' , 'sqlite:///data.db')
+# if the get method return None (that is the app is not running on heroku's computer), then the data.db on our computer will be used
+# telling the app from where to find the data.db file 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turns off the Flask_sqlalchemy tracker for changes as it cost some resources
 # however this does not turn off the underlying sqlalchemy tracker
 app.secret_key = 'jose'
