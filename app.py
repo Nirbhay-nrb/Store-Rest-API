@@ -14,7 +14,12 @@ from db import db
 # creating app and api
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL'.replace('://' , 'ql://',1) , 'sqlite:///data.db')
+uri = os.environ.get('DATABASE_URL')
+if uri:
+    uri.replace("postgres://", "postgresql://", 1)
+else:
+    uri = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 # if the get method return None (that is the app is not running on heroku's computer), then the data.db on our computer will be used
 # telling the app from where to find the data.db file 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turns off the Flask_sqlalchemy tracker for changes as it cost some resources
