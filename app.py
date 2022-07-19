@@ -17,6 +17,7 @@ app.config['DEBUG'] = True
 try:
     uri = os.environ.get('DATABASE_URL')
     uri.replace("postgres://", "postgresql://", 1)
+    print(uri)
     app.config['SQLALCHEMY_DATABASE_URI'] = uri
 except:
     uri = 'sqlite:///data.db'
